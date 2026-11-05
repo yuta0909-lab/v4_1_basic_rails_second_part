@@ -4,8 +4,7 @@ describe 'Board', type: :request do
   let!(:user) { create(:user) }
   let!(:board) { create(:board) }
   before {
-    session = defined?(rspec_session) ? rspec_session : {}
-    allow_any_instance_of(ActionDispatch::Request).to receive(:session).and_return({ user_id: user.id })
+    post '/login', params: { email: user.email, password: '12345678' }
   }
 
   it '他人の掲示板の編集画面に遷移できないこと' do
